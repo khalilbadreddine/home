@@ -1,0 +1,41 @@
+{
+  "name": "therecipeseeker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Seeker's Kitchen — a recipe home that feels like home. Warm, safe, and automated.",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0 -p 3000",
+    "db:setup": "node scripts/db-setup.mjs",
+    "db:seed": "node scripts/seed.mjs",
+    "setup": "npm run db:setup && npm run db:seed"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/fraunces": "^5.3.0",
+    "@fontsource/karla": "^5.3.0",
+    "@types/pg": "^8.23.1",
+    "bcryptjs": "^2.4.3",
+    "gsap": "^3.12.5",
+    "lucide-react": "^0.454.0",
+    "next": "^14.2.15",
+    "next-auth": "^4.24.10",
+    "pg": "^8.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resend": "^4.0.1",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.17.6",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.170.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  }
+}
