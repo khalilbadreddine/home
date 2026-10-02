@@ -1,0 +1,1041 @@
+{
+  "version": "1.0",
+  "meta": {
+    "title": "The 14 Kilometres That Move the World",
+    "slug": "demo",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "timing": "voiceover",
+    "audience": "Curious YouTube viewers, geography/business explainer fans",
+    "notes": "Demo plan. Only three synthetic assets exist; every other media slot renders as an animatic placeholder until the asset-scout fills it."
+  },
+  "treatment": {
+    "logline": "A 14 km gap between two continents became Africa's busiest port because Morocco built exactly where the world already sails.",
+    "concept": "The strait as a doorway. The film borrows the look of a navigator's chart: deep navy, signal-yellow pen lines drawn over the world, cold real footage. Every map is a 'door' seen from above; every number is stamped like a logbook entry.",
+    "why": "The script's argument is spatial (where things are) and its central metaphor is a door. A chart language makes the geography readable and gives the metaphor a visual home that can recur from hook to close.",
+    "alternatives_considered": [
+      "Archive-heavy history documentary (rejected: script is about the present and the future)",
+      "Bright flat motion graphics (rejected: loses the weight of real ships and sea)"
+    ],
+    "palette": {
+      "bg": "#07131f",
+      "fg": "#f2efe6",
+      "accent": "#ffc83d",
+      "accent2": "#ff5a36",
+      "muted": "#7d8fa3"
+    },
+    "fonts": {
+      "display": "Anton",
+      "body": "Inter",
+      "accent": "Caveat",
+      "mono": "JetBrains Mono"
+    },
+    "grade": "cold",
+    "texture": [
+      "grain",
+      "vignette"
+    ],
+    "texture_intensity": 0.3,
+    "ai_image_style": "cinematic documentary photograph, overcast cold light, muted navy and steel tones, subtle 35mm film grain, no text, no logos",
+    "motifs": [
+      {
+        "name": "The door",
+        "description": "Frames, gaps and narrow passages: the strait on the map, the gap between split panels, the frame of a polaroid.",
+        "meaning": "Opportunity is a position, not a thing."
+      },
+      {
+        "name": "The navigator's line",
+        "description": "Hand-drawn signal-yellow strokes: measurement lines, routes, circles.",
+        "meaning": "Someone deliberately drew this plan."
+      }
+    ],
+    "rules": [
+      "Numbers are always signal yellow.",
+      "Maps are always the dark chart style.",
+      "Footage is graded cold; only the final shot is warm (the payoff of the metaphor)."
+    ]
+  },
+  "sections": [
+    {
+      "id": "hook",
+      "title": "Hook",
+      "role": "hook",
+      "energy": 4
+    },
+    {
+      "id": "context",
+      "title": "A door you sail past",
+      "role": "context",
+      "energy": 3
+    },
+    {
+      "id": "build",
+      "title": "Tanger Med",
+      "role": "build",
+      "energy": 4
+    },
+    {
+      "id": "payoff",
+      "title": "Number one",
+      "role": "payoff",
+      "energy": 5
+    },
+    {
+      "id": "close",
+      "title": "Geography is destiny",
+      "role": "recap",
+      "energy": 2
+    }
+  ],
+  "shots": [
+    {
+      "id": "s01",
+      "section": "hook",
+      "start": 0,
+      "end": 1.42,
+      "script": "Fourteen kilometres.",
+      "hold": 0.2,
+      "beat": {
+        "role": "hook",
+        "emotion": "intrigue",
+        "energy": 4,
+        "info_type": "number",
+        "key_terms": [
+          "fourteen kilometres"
+        ]
+      },
+      "intent": "Open on a number with no context so the viewer asks 'fourteen kilometres of what?'. Open sea under the number hints at the answer.",
+      "strategy": "typography",
+      "camera": {
+        "move": "push_in",
+        "intensity": 0.35
+      },
+      "layers": [
+        {
+          "type": "video",
+          "src": "footage/sea.mp4",
+          "darken": 0.25,
+          "asset": {
+            "kind": "stock_video",
+            "description": "Aerial drone shot over the Strait of Gibraltar, open water, a coastline faint on the horizon",
+            "query": "strait of gibraltar aerial drone",
+            "alternates": [
+              "sea strait coastline drone",
+              "ocean channel aerial"
+            ],
+            "min_duration": 3,
+            "status": "provided"
+          }
+        },
+        {
+          "type": "text",
+          "text": "14 KM",
+          "style": "slam",
+          "highlight": [
+            "14"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "impact",
+          "at": 0.059,
+          "volume": 0.7
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "section": "hook",
+      "start": 1.42,
+      "end": 3.88,
+      "script": "That's all that separates Europe from Africa.",
+      "beat": {
+        "role": "hook",
+        "emotion": "surprise",
+        "energy": 3,
+        "info_type": "place"
+      },
+      "intent": "Answer the question with a map: dive from the number into the strait and literally measure the gap. The viewer should feel how tiny it is.",
+      "strategy": "map",
+      "transition_in": {
+        "type": "zoom_through",
+        "duration": 0.5
+      },
+      "layers": [
+        {
+          "type": "custom",
+          "component": "WorldMap",
+          "props": {
+            "style": "dark",
+            "from": {
+              "lon": -5.6,
+              "lat": 36.2,
+              "zoom": 5
+            },
+            "to": {
+              "lon": -5.6,
+              "lat": 35.95,
+              "zoom": 22
+            },
+            "highlight": [
+              "Spain"
+            ],
+            "highlight2": [
+              "Morocco"
+            ],
+            "labels": [
+              {
+                "lon": -5.2,
+                "lat": 36.45,
+                "text": "Europe"
+              },
+              {
+                "lon": -5.6,
+                "lat": 35.5,
+                "text": "Africa"
+              }
+            ]
+          }
+        },
+        {
+          "type": "annotation",
+          "shape": "underline",
+          "points": [
+            {
+              "x": 50,
+              "y": 40
+            },
+            {
+              "x": 50,
+              "y": 60
+            }
+          ],
+          "label": "14 km",
+          "start": 1.273,
+          "draw_duration": 0.5,
+          "lock": "screen"
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "whoosh",
+          "at": -0.2,
+          "volume": 0.5
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "section": "hook",
+      "start": 3.88,
+      "end": 7.44,
+      "script": "And every year, around a hundred thousand ships squeeze through it.",
+      "beat": {
+        "role": "hook",
+        "emotion": "awe",
+        "energy": 4,
+        "info_type": "number"
+      },
+      "intent": "Scale shock. A single ship fills the frame while the count runs up to 100,000: one becomes many.",
+      "strategy": "data",
+      "camera": {
+        "move": "drift",
+        "intensity": 0.4
+      },
+      "layers": [
+        {
+          "type": "video",
+          "darken": 0.45,
+          "asset": {
+            "kind": "stock_video",
+            "description": "Huge container ship moving through a narrow strait, aerial side view",
+            "query": "container ship aerial",
+            "alternates": [
+              "cargo ship sea drone",
+              "ship strait timelapse"
+            ],
+            "min_duration": 4
+          }
+        },
+        {
+          "type": "fx",
+          "effect": "scrim",
+          "side": "center",
+          "intensity": 0.4
+        },
+        {
+          "type": "counter",
+          "to": 100000,
+          "label": "ships every year",
+          "cue_word": "hundred",
+          "start": 1.18,
+          "count_duration": 1.4
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "swish",
+          "cue_word": "hundred",
+          "at": 1.18,
+          "volume": 0.5
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "section": "context",
+      "start": 7.44,
+      "end": 10.86,
+      "script": "For most of history, this strait was a door you sailed past.",
+      "beat": {
+        "role": "context",
+        "emotion": "reflective",
+        "energy": 2,
+        "info_type": "time"
+      },
+      "intent": "Drop the energy and step back in time: an old engraving of the strait pinned like a found document, the navigator's hand noting what it used to mean.",
+      "strategy": "evidence",
+      "camera": {
+        "move": "pan_right",
+        "intensity": 0.3
+      },
+      "transition_in": {
+        "type": "dip_black",
+        "duration": 0.6
+      },
+      "layers": [
+        {
+          "type": "background",
+          "style": "paper"
+        },
+        {
+          "type": "card",
+          "frame": "polaroid",
+          "box": {
+            "x": 24,
+            "y": 12,
+            "w": 46,
+            "h": 68
+          },
+          "rotate": -4,
+          "grade": "vintage",
+          "caption": "Gibraltar, c. 1750",
+          "asset": {
+            "kind": "archive_image",
+            "description": "18th-century engraving or old map of the Strait of Gibraltar",
+            "query": "strait of gibraltar engraving",
+            "alternates": [
+              "gibraltar old map",
+              "straits of gibraltar 18th century"
+            ],
+            "sources": [
+              "wikimedia",
+              "archive_org",
+              "loc"
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "text": "sail past →",
+          "style": "marker",
+          "box": {
+            "x": 66,
+            "y": 62,
+            "w": 30,
+            "h": 14
+          },
+          "start": 1.496
+        },
+        {
+          "type": "fx",
+          "effect": "dust",
+          "intensity": 0.4
+        }
+      ],
+      "texture": "inherit",
+      "sfx": [
+        {
+          "cue": "whoosh_long",
+          "at": -0.3,
+          "volume": 0.35
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "section": "context",
+      "start": 10.86,
+      "end": 15.12,
+      "script": "Then, in 2007, Morocco decided to build a door you sail into.",
+      "beat": {
+        "role": "setup",
+        "emotion": "ambition",
+        "energy": 4,
+        "info_type": "time",
+        "key_terms": [
+          "2007",
+          "Morocco"
+        ]
+      },
+      "intent": "The turn. Hard flash out of the past into modern construction: cranes, lights, momentum. The date lands as a logbook stamp.",
+      "strategy": "specific_detail",
+      "camera": {
+        "move": "crash_zoom",
+        "intensity": 0.5
+      },
+      "transition_in": {
+        "type": "flash"
+      },
+      "layers": [
+        {
+          "type": "video",
+          "src": "footage/city-lights.mp4",
+          "darken": 0.2,
+          "asset": {
+            "kind": "stock_video",
+            "description": "Time-lapse of a port under construction at dusk, cranes and work lights",
+            "query": "port construction timelapse cranes",
+            "alternates": [
+              "container terminal construction",
+              "cranes dusk timelapse"
+            ],
+            "status": "provided"
+          }
+        },
+        {
+          "type": "fx",
+          "effect": "scrim",
+          "side": "left",
+          "intensity": 0.5
+        },
+        {
+          "type": "text",
+          "text": "2007",
+          "subtitle": "Tangier, Morocco",
+          "style": "label",
+          "position": "top_left",
+          "cue_word": "2007",
+          "start": 0.52
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "boom",
+          "at": 0,
+          "volume": 0.5
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "section": "build",
+      "start": 15.12,
+      "end": 17.1,
+      "script": "Tanger Med.",
+      "hold": 1.2,
+      "beat": {
+        "role": "reveal",
+        "emotion": "pride",
+        "energy": 5,
+        "info_type": "place"
+      },
+      "intent": "Hero reveal of the name. The title lives inside the port: in front of the sky, behind the crane, while a dolly-zoom stretches the space.",
+      "strategy": "typography",
+      "hero": true,
+      "camera": {
+        "move": "dolly_zoom",
+        "intensity": 0.6
+      },
+      "layers": [
+        {
+          "type": "parallax",
+          "planes": [
+            {
+              "depth": 0,
+              "asset": {
+                "kind": "ai_image",
+                "description": "Giant container port at blue hour seen from the sea, rows of cranes",
+                "prompt": "wide view of a giant container port at blue hour seen from the water, rows of gantry cranes, calm sea in foreground"
+              }
+            },
+            {
+              "depth": 0.45,
+              "text": "TANGER MED",
+              "color": "accent",
+              "size": 24
+            },
+            {
+              "depth": 1,
+              "asset": {
+                "kind": "cutout",
+                "description": "Single gantry crane silhouette, isolated, for the foreground plane",
+                "prompt": "single ship-to-shore gantry crane, side view, isolated on plain light background",
+                "needs_cutout": true
+              },
+              "fit": "contain"
+            }
+          ]
+        }
+      ],
+      "post": [
+        {
+          "effect": "bloom",
+          "intensity": 0.3
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "riser",
+          "at": -1.8,
+          "volume": 0.45
+        },
+        {
+          "cue": "boom",
+          "at": 0,
+          "volume": 0.6
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "section": "build",
+      "start": 17.1,
+      "end": 20.98,
+      "script": "A port placed exactly where the world's shipping lanes already run.",
+      "beat": {
+        "role": "explanation",
+        "emotion": "clarity",
+        "energy": 3,
+        "info_type": "process"
+      },
+      "intent": "Zoom out to the planet: lanes from Asia and the Americas converge on one glowing point. The viewer understands 'position' as the product.",
+      "strategy": "abstract",
+      "transition_in": {
+        "type": "crossfade",
+        "duration": 0.6
+      },
+      "layers": [
+        {
+          "type": "background",
+          "style": "radial",
+          "colors": [
+            "bg",
+            "#10283f"
+          ]
+        },
+        {
+          "type": "custom",
+          "component": "DotGlobe",
+          "props": {
+            "from": {
+              "lon": 50,
+              "lat": 25
+            },
+            "to": {
+              "lon": 0,
+              "lat": 32
+            },
+            "markers": [
+              {
+                "lon": -5.5,
+                "lat": 35.9,
+                "label": "Tanger Med",
+                "at": 1.2
+              }
+            ],
+            "arcs": [
+              {
+                "from": {
+                  "lon": 121.5,
+                  "lat": 31.2
+                },
+                "to": {
+                  "lon": -5.5,
+                  "lat": 35.9
+                },
+                "at": 0.6
+              },
+              {
+                "from": {
+                  "lon": 103.8,
+                  "lat": 1.3
+                },
+                "to": {
+                  "lon": -5.5,
+                  "lat": 35.9
+                },
+                "at": 0.9
+              },
+              {
+                "from": {
+                  "lon": -74,
+                  "lat": 40.7
+                },
+                "to": {
+                  "lon": -5.5,
+                  "lat": 35.9
+                },
+                "at": 1.3
+              },
+              {
+                "from": {
+                  "lon": -5.5,
+                  "lat": 35.9
+                },
+                "to": {
+                  "lon": 4.4,
+                  "lat": 51.9
+                },
+                "at": 1.8
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "section": "build",
+      "start": 20.98,
+      "end": 23.74,
+      "script": "Ships between Asia and Europe don't have to detour.",
+      "beat": {
+        "role": "explanation",
+        "emotion": "insight",
+        "energy": 3,
+        "info_type": "process"
+      },
+      "intent": "Show the lane itself: from Suez to the North Sea, the line passes straight through Tangier's door.",
+      "strategy": "map",
+      "transition_in": {
+        "type": "zoom_through",
+        "duration": 0.45
+      },
+      "layers": [
+        {
+          "type": "custom",
+          "component": "WorldMap",
+          "props": {
+            "style": "dark",
+            "from": {
+              "lon": 14,
+              "lat": 40,
+              "zoom": 3.2
+            },
+            "to": {
+              "lon": 8,
+              "lat": 40,
+              "zoom": 3.6
+            },
+            "routes": [
+              {
+                "from": {
+                  "lon": 32.3,
+                  "lat": 31.3
+                },
+                "to": {
+                  "lon": -5.6,
+                  "lat": 35.95
+                },
+                "at": 0.2
+              },
+              {
+                "from": {
+                  "lon": -5.6,
+                  "lat": 35.95
+                },
+                "to": {
+                  "lon": 4.4,
+                  "lat": 51.9
+                },
+                "at": 1.3
+              }
+            ],
+            "markers": [
+              {
+                "lon": -5.5,
+                "lat": 35.9,
+                "label": "Tanger Med",
+                "at": 1.1
+              }
+            ]
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "whoosh",
+          "at": -0.15,
+          "volume": 0.4
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "section": "build",
+      "start": 23.74,
+      "end": 25.04,
+      "script": "They just stop.",
+      "hold": 0.5,
+      "beat": {
+        "role": "payoff",
+        "emotion": "punchline",
+        "energy": 4,
+        "info_type": "fact"
+      },
+      "intent": "Visual punchline: the moving ship freezes on 'stop', shutter click, logbook stamp. Motion → stillness is the joke.",
+      "strategy": "typography",
+      "layers": [
+        {
+          "type": "video",
+          "src": "footage/sea.mp4",
+          "trim": 4,
+          "freeze_at": 0.45,
+          "asset": {
+            "kind": "stock_video",
+            "description": "Container ship sailing (same ship as s03 if possible)",
+            "query": "container ship sailing side view",
+            "status": "provided"
+          }
+        },
+        {
+          "type": "fx",
+          "effect": "flash",
+          "start": 0.418,
+          "intensity": 0.25
+        },
+        {
+          "type": "text",
+          "text": "STOP",
+          "style": "stamp",
+          "start": 0.465
+        }
+      ],
+      "post": [
+        {
+          "effect": "desaturate",
+          "intensity": 0.8,
+          "start": 0.45
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "shutter",
+          "at": 0.418,
+          "volume": 0.8
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "section": "payoff",
+      "start": 25.04,
+      "end": 28.64,
+      "script": "Today it moves more than eight million containers a year,",
+      "beat": {
+        "role": "payoff",
+        "emotion": "awe",
+        "energy": 5,
+        "info_type": "number"
+      },
+      "intent": "The scale payoff: machinery on one side, an ocean of containers on the other, the number slamming in between, the gap between panels echoing the strait.",
+      "strategy": "data",
+      "hero": true,
+      "transition_in": {
+        "type": "whip_left"
+      },
+      "layers": [
+        {
+          "type": "split",
+          "layout": "two_vertical",
+          "gap": 0.8,
+          "panels": [
+            {
+              "asset": {
+                "kind": "stock_video",
+                "description": "Gantry crane lifting a container onto a ship, close",
+                "query": "container crane loading ship",
+                "alternates": [
+                  "port crane container close up"
+                ]
+              },
+              "camera": {
+                "move": "push_in",
+                "intensity": 0.3
+              }
+            },
+            {
+              "asset": {
+                "kind": "stock_video",
+                "description": "Top-down aerial of endless rows of colourful shipping containers",
+                "query": "shipping containers aerial top-down",
+                "alternates": [
+                  "container terminal drone"
+                ]
+              },
+              "camera": {
+                "move": "pull_out",
+                "intensity": 0.3
+              }
+            }
+          ]
+        },
+        {
+          "type": "fx",
+          "effect": "scrim",
+          "side": "full",
+          "intensity": 0.35
+        },
+        {
+          "type": "counter",
+          "to": 8000000,
+          "suffix": "+",
+          "label": "containers a year",
+          "cue_word": "eight",
+          "start": 1.62,
+          "count_duration": 1.5,
+          "size": 14
+        }
+      ],
+      "post": [
+        {
+          "effect": "pulse",
+          "intensity": 0.6,
+          "times": [
+            2.7
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "whoosh",
+          "at": -0.15,
+          "volume": 0.5
+        },
+        {
+          "cue": "impact",
+          "cue_word": "eight",
+          "at": 1.62,
+          "volume": 0.6
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "section": "payoff",
+      "start": 28.64,
+      "end": 30.92,
+      "script": "more than any other port in Africa.",
+      "beat": {
+        "role": "evidence",
+        "emotion": "pride",
+        "energy": 4,
+        "info_type": "comparison"
+      },
+      "intent": "Put the claim on the continent: Africa's outline, Morocco lit, a logbook stamp declaring the rank.",
+      "strategy": "map",
+      "camera": {
+        "move": "push_in",
+        "intensity": 0.25
+      },
+      "layers": [
+        {
+          "type": "custom",
+          "component": "WorldMap",
+          "props": {
+            "style": "dark",
+            "from": {
+              "lon": 18,
+              "lat": 4,
+              "zoom": 2.1
+            },
+            "to": {
+              "lon": 12,
+              "lat": 8,
+              "zoom": 2.4
+            },
+            "highlight": [
+              "Morocco"
+            ],
+            "markers": [
+              {
+                "lon": -5.5,
+                "lat": 35.9,
+                "label": "Tanger Med",
+                "at": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "text": "Nº1 in Africa",
+          "style": "stamp",
+          "box": {
+            "x": 52,
+            "y": 50,
+            "w": 44,
+            "h": 26
+          },
+          "start": 0.965,
+          "rotate": -7
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "pop",
+          "at": 0.965,
+          "volume": 0.6
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "section": "close",
+      "start": 30.92,
+      "end": 32.74,
+      "script": "The lesson is simple.",
+      "hold": 0.6,
+      "beat": {
+        "role": "recap",
+        "emotion": "calm",
+        "energy": 2,
+        "info_type": "abstract"
+      },
+      "intent": "Breath. Silence and empty navy before the final line; the contrast makes the last shot land.",
+      "strategy": "typography",
+      "transition_in": {
+        "type": "dip_black",
+        "duration": 0.8
+      },
+      "layers": [
+        {
+          "type": "background",
+          "style": "grid"
+        },
+        {
+          "type": "text",
+          "text": "The lesson\nis simple.",
+          "style": "reveal",
+          "size": 9
+        }
+      ],
+      "sfx": [
+        {
+          "cue": "drone",
+          "at": 0,
+          "volume": 0.35
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "section": "close",
+      "start": 32.74,
+      "end": 38.04,
+      "script": "Geography is destiny, but only if you build on it.",
+      "hold": 1.2,
+      "beat": {
+        "role": "recap",
+        "emotion": "resolve",
+        "energy": 3,
+        "info_type": "abstract"
+      },
+      "intent": "Warm payoff of the cold palette: the strait at sunset, the thesis written across it, and the navigator's hand adds the condition.",
+      "strategy": "metaphor",
+      "hero": true,
+      "camera": {
+        "move": "pull_out",
+        "intensity": 0.4
+      },
+      "grade": "warm_film",
+      "transition_in": {
+        "type": "crossfade",
+        "duration": 1
+      },
+      "layers": [
+        {
+          "type": "image",
+          "src": "images/sunset.jpg",
+          "asset": {
+            "kind": "stock_image",
+            "description": "Sunset over the Strait of Gibraltar, Moroccan coast in silhouette",
+            "query": "gibraltar strait sunset",
+            "status": "provided"
+          }
+        },
+        {
+          "type": "fx",
+          "effect": "light_leak",
+          "intensity": 0.45
+        },
+        {
+          "type": "fx",
+          "effect": "letterbox",
+          "intensity": 1
+        },
+        {
+          "type": "text",
+          "text": "Geography is destiny",
+          "style": "kinetic",
+          "highlight": [
+            "destiny"
+          ],
+          "position": "center",
+          "size": 8,
+          "word_times": [
+            0.08,
+            0.54,
+            0.98
+          ]
+        },
+        {
+          "type": "text",
+          "text": "…if you build on it.",
+          "style": "marker",
+          "box": {
+            "x": 30,
+            "y": 60,
+            "w": 50,
+            "h": 14
+          },
+          "cue_word": "build",
+          "start": 2.6
+        }
+      ],
+      "texture": "inherit"
+    }
+  ],
+  "captions": {
+    "enabled": true,
+    "style": "pop",
+    "position": "bottom",
+    "max_words": 3,
+    "hide_during": [
+      "s01",
+      "s06",
+      "s09",
+      "s12",
+      "s13"
+    ]
+  },
+  "audio": {
+    "voiceover": {
+      "src": "audio/voiceover.wav"
+    },
+    "music": [
+      {
+        "src": "music/bed.wav",
+        "volume": 0.3,
+        "duck": 0.4,
+        "fade_in": 1.5,
+        "fade_out": 2.5,
+        "mood": "tense, pulsing, maritime"
+      }
+    ],
+    "sfx_volume": 1
+  }
+}

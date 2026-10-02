@@ -1,0 +1,1946 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "visual-director/visual-plan",
+  "title": "Visual Plan",
+  "description": "The Visual Director's shot-by-shot plan. Every value here maps 1:1 to something the DirectorCut engine can render. All times are in seconds. Shot-level times are absolute (video timeline); layer/sfx times are relative to their shot's start. All x/y/w/h coordinates are percent of the frame (0-100).",
+  "type": "object",
+  "required": [
+    "version",
+    "meta",
+    "treatment",
+    "shots"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "fps": {
+          "enum": [
+            24,
+            25,
+            30,
+            60
+          ],
+          "default": 30
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 320,
+          "default": 1920
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 320,
+          "default": 1080
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Optional. Defaults to the end of the last shot (or the voiceover length if longer)."
+        },
+        "timing": {
+          "enum": [
+            "estimated",
+            "voiceover"
+          ],
+          "default": "estimated",
+          "description": "'estimated' = times guessed from word count. 'voiceover' = snapped to real word timestamps with retime."
+        },
+        "language": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "treatment": {
+      "$ref": "#/$defs/treatment"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/$defs/beatRole"
+          },
+          "energy": {
+            "$ref": "#/$defs/energy"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/shot"
+      }
+    },
+    "global_layers": {
+      "description": "Layers drawn over the whole video (above shots, below captions). Times are absolute. Use for a channel bug, persistent grain, a chapter progress bar.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/layer"
+      }
+    },
+    "captions": {
+      "$ref": "#/$defs/captions"
+    },
+    "audio": {
+      "$ref": "#/$defs/audio"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "energy": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "1 = calm/contemplative, 3 = normal explaining, 5 = peak/shock/climax"
+    },
+    "seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "percent": {
+      "type": "number",
+      "minimum": -50,
+      "maximum": 150
+    },
+    "color": {
+      "type": "string",
+      "description": "Hex (#RRGGBB / #RRGGBBAA) or a palette token: bg, fg, accent, accent2, muted"
+    },
+    "font": {
+      "enum": [
+        "Anton",
+        "Bebas Neue",
+        "Oswald",
+        "Playfair Display",
+        "DM Serif Display",
+        "Inter",
+        "Montserrat",
+        "Space Grotesk",
+        "JetBrains Mono",
+        "Permanent Marker",
+        "Caveat"
+      ]
+    },
+    "fontRole": {
+      "enum": [
+        "display",
+        "body",
+        "accent",
+        "mono"
+      ]
+    },
+    "beatRole": {
+      "enum": [
+        "hook",
+        "setup",
+        "context",
+        "build",
+        "tension",
+        "reveal",
+        "payoff",
+        "evidence",
+        "comparison",
+        "explanation",
+        "emotional",
+        "transition",
+        "recap",
+        "cta"
+      ]
+    },
+    "strategy": {
+      "description": "The visual rhetoric used to translate the words into images (see references/visual-thinking.md).",
+      "enum": [
+        "literal",
+        "specific_detail",
+        "metaphor",
+        "data",
+        "evidence",
+        "map",
+        "typography",
+        "reenactment",
+        "contrast",
+        "montage",
+        "abstract",
+        "process",
+        "character",
+        "callback"
+      ]
+    },
+    "ease": {
+      "enum": [
+        "linear",
+        "in",
+        "out",
+        "in_out",
+        "snap",
+        "smooth"
+      ]
+    },
+    "grade": {
+      "enum": [
+        "none",
+        "natural",
+        "cinematic",
+        "teal_orange",
+        "noir",
+        "warm_film",
+        "cold",
+        "bleach",
+        "vintage",
+        "vivid",
+        "muted",
+        "night",
+        "sepia",
+        "matrix",
+        "duotone"
+      ]
+    },
+    "blend": {
+      "enum": [
+        "normal",
+        "screen",
+        "multiply",
+        "overlay",
+        "soft-light",
+        "lighten",
+        "darken",
+        "color-dodge",
+        "difference"
+      ]
+    },
+    "position": {
+      "enum": [
+        "center",
+        "top",
+        "bottom",
+        "left",
+        "right",
+        "top_left",
+        "top_right",
+        "bottom_left",
+        "bottom_right",
+        "lower_third"
+      ]
+    },
+    "box": {
+      "type": "object",
+      "description": "Explicit placement in percent of frame. x/y = top-left corner.",
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/percent"
+        },
+        "y": {
+          "$ref": "#/$defs/percent"
+        },
+        "w": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "h": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 200
+        }
+      },
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/percent"
+        },
+        "y": {
+          "$ref": "#/$defs/percent"
+        }
+      },
+      "additionalProperties": false
+    },
+    "anim": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "none",
+            "fade",
+            "pop",
+            "slide_up",
+            "slide_down",
+            "slide_left",
+            "slide_right",
+            "scale_up",
+            "scale_down",
+            "blur",
+            "wipe_right",
+            "wipe_up",
+            "draw"
+          ]
+        },
+        "duration": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0.4
+        }
+      },
+      "additionalProperties": false
+    },
+    "transform": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "translate, percent of frame width"
+        },
+        "y": {
+          "type": "number",
+          "description": "translate, percent of frame height"
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rotate": {
+          "type": "number",
+          "description": "degrees"
+        }
+      },
+      "additionalProperties": false
+    },
+    "camera": {
+      "type": "object",
+      "description": "Virtual camera. On a shot it moves every world-locked layer together. Directions are CAMERA directions (pan_right = camera moves right, content slides left).",
+      "required": [
+        "move"
+      ],
+      "properties": {
+        "move": {
+          "enum": [
+            "static",
+            "push_in",
+            "pull_out",
+            "pan_left",
+            "pan_right",
+            "tilt_up",
+            "tilt_down",
+            "drift",
+            "handheld",
+            "crash_zoom",
+            "rotate_cw",
+            "rotate_ccw",
+            "dolly_zoom",
+            "custom"
+          ]
+        },
+        "intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5
+        },
+        "ease": {
+          "$ref": "#/$defs/ease"
+        },
+        "target": {
+          "$ref": "#/$defs/point",
+          "description": "Point the camera pushes toward / pulls away from (percent of frame). Default center."
+        },
+        "shake": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Extra handheld shake on top of the move."
+        },
+        "from": {
+          "$ref": "#/$defs/transform"
+        },
+        "to": {
+          "$ref": "#/$defs/transform"
+        }
+      },
+      "additionalProperties": false
+    },
+    "transition": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "cut",
+            "crossfade",
+            "dip_black",
+            "dip_white",
+            "flash",
+            "whip_left",
+            "whip_right",
+            "whip_up",
+            "whip_down",
+            "slide_left",
+            "slide_right",
+            "slide_up",
+            "zoom_through",
+            "zoom_out",
+            "wipe_left",
+            "wipe_right",
+            "iris",
+            "glitch",
+            "blur",
+            "film_burn"
+          ]
+        },
+        "duration": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3,
+          "description": "Seconds, centred on the cut point. Default depends on type."
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        }
+      },
+      "additionalProperties": false
+    },
+    "asset": {
+      "type": "object",
+      "description": "What this media layer needs. The asset-scout fills `src` on the layer and sets status.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "stock_video",
+            "stock_image",
+            "archive_video",
+            "archive_image",
+            "ai_image",
+            "ai_video",
+            "screenshot",
+            "map",
+            "provided",
+            "cutout",
+            "render"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "What the frame must show, in plain words. Shown on the animatic placeholder."
+        },
+        "query": {
+          "type": "string",
+          "description": "Primary stock search query: 2-4 keywords, subject first, plus a POV word (drone, macro, close-up, handheld, top-down, timelapse...)."
+        },
+        "alternates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prompt": {
+          "type": "string",
+          "description": "AI image/video prompt (the treatment's ai_image_style is appended automatically by the scout)."
+        },
+        "negative": {
+          "type": "string"
+        },
+        "orientation": {
+          "enum": [
+            "landscape",
+            "portrait",
+            "square"
+          ]
+        },
+        "min_duration": {
+          "type": "number",
+          "minimum": 0
+        },
+        "needs_cutout": {
+          "type": "boolean",
+          "description": "Run background removal (for parallax foregrounds / text-behind-subject)."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Preferred providers, e.g. pexels, pixabay, archive_org, nasa, wikimedia, flux, openai"
+        },
+        "fallback": {
+          "enum": [
+            "stock_image",
+            "ai_image",
+            "archive_image",
+            "graphic",
+            "none"
+          ]
+        },
+        "status": {
+          "enum": [
+            "todo",
+            "found",
+            "generated",
+            "provided",
+            "placeholder",
+            "rejected"
+          ],
+          "default": "todo"
+        },
+        "credit": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "cost_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sfx": {
+      "type": "object",
+      "properties": {
+        "cue": {
+          "enum": [
+            "whoosh",
+            "whoosh_long",
+            "swish",
+            "impact",
+            "boom",
+            "riser",
+            "click",
+            "pop",
+            "glitch",
+            "ding",
+            "typing",
+            "shutter",
+            "tick",
+            "heartbeat",
+            "drone"
+          ],
+          "description": "Built-in synthesized SFX (see library/sfx). Ignored if src is set."
+        },
+        "src": {
+          "type": "string",
+          "description": "Path relative to the project assets dir"
+        },
+        "at": {
+          "type": "number",
+          "description": "Seconds relative to shot start (can be negative to anticipate a cut)"
+        },
+        "volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 0.6
+        },
+        "notes": {
+          "type": "string"
+        },
+        "cue_word": {
+          "type": "string",
+          "description": "Sync the sound to this spoken word (resolved by retime)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "post": {
+      "type": "object",
+      "description": "A filter applied to the whole shot image (everything world- and screen-locked inside the shot).",
+      "required": [
+        "effect"
+      ],
+      "properties": {
+        "effect": {
+          "enum": [
+            "chromatic",
+            "glitch",
+            "blur",
+            "bloom",
+            "desaturate",
+            "pulse"
+          ]
+        },
+        "intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5
+        },
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        },
+        "times": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "pulse only: shot-relative times of each beat pulse"
+        }
+      },
+      "additionalProperties": false
+    },
+    "treatment": {
+      "type": "object",
+      "required": [
+        "concept",
+        "palette",
+        "fonts"
+      ],
+      "properties": {
+        "logline": {
+          "type": "string",
+          "description": "One sentence: what the video is about."
+        },
+        "concept": {
+          "type": "string",
+          "description": "The visual big idea that ties the video together (e.g. 'the story is told as a case file being assembled on a desk')."
+        },
+        "why": {
+          "type": "string",
+          "description": "Why this concept serves this script and audience."
+        },
+        "alternatives_considered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "palette": {
+          "type": "object",
+          "required": [
+            "bg",
+            "fg",
+            "accent"
+          ],
+          "properties": {
+            "bg": {
+              "type": "string"
+            },
+            "fg": {
+              "type": "string"
+            },
+            "accent": {
+              "type": "string"
+            },
+            "accent2": {
+              "type": "string"
+            },
+            "muted": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "fonts": {
+          "type": "object",
+          "required": [
+            "display",
+            "body"
+          ],
+          "properties": {
+            "display": {
+              "$ref": "#/$defs/font"
+            },
+            "body": {
+              "$ref": "#/$defs/font"
+            },
+            "accent": {
+              "$ref": "#/$defs/font"
+            },
+            "mono": {
+              "$ref": "#/$defs/font"
+            }
+          },
+          "additionalProperties": false
+        },
+        "grade": {
+          "$ref": "#/$defs/grade",
+          "description": "Default grade for every media layer."
+        },
+        "texture": {
+          "type": "array",
+          "description": "Fx applied over every shot (keep subtle).",
+          "items": {
+            "enum": [
+              "grain",
+              "vignette",
+              "dust",
+              "scanlines",
+              "light_leak",
+              "letterbox"
+            ]
+          }
+        },
+        "texture_intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.35
+        },
+        "ai_image_style": {
+          "type": "string",
+          "description": "Style suffix appended to every AI image prompt so all generated images share one look."
+        },
+        "motifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "meaning": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "House rules for this video, e.g. 'numbers always in accent yellow', 'no faces of real victims'."
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "shot": {
+      "type": "object",
+      "required": [
+        "id",
+        "start",
+        "end",
+        "intent",
+        "layers"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/seconds"
+        },
+        "end": {
+          "$ref": "#/$defs/seconds"
+        },
+        "script": {
+          "type": "string",
+          "description": "The exact voiceover words this shot covers."
+        },
+        "hold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Seconds to hold after the words finish (estimate mode adds it; with a real voiceover, write the pause into the script/TTS direction instead). Use for reveals and emotional beats."
+        },
+        "beat": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "$ref": "#/$defs/beatRole"
+            },
+            "emotion": {
+              "type": "string"
+            },
+            "energy": {
+              "$ref": "#/$defs/energy"
+            },
+            "info_type": {
+              "enum": [
+                "fact",
+                "number",
+                "place",
+                "time",
+                "person",
+                "process",
+                "comparison",
+                "quote",
+                "abstract",
+                "story",
+                "list",
+                "question"
+              ]
+            },
+            "key_terms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "intent": {
+          "type": "string",
+          "description": "What the viewer must UNDERSTAND and FEEL during this shot, and why this image does it."
+        },
+        "strategy": {
+          "$ref": "#/$defs/strategy"
+        },
+        "hero": {
+          "type": "boolean",
+          "description": "A visual peak. Spend budget here (AI image, custom animation, complex stack)."
+        },
+        "camera": {
+          "$ref": "#/$defs/camera"
+        },
+        "grade": {
+          "$ref": "#/$defs/grade"
+        },
+        "background": {
+          "$ref": "#/$defs/color",
+          "description": "Backing color behind all layers. Default palette bg."
+        },
+        "layers": {
+          "type": "array",
+          "description": "Bottom to top.",
+          "items": {
+            "$ref": "#/$defs/layer"
+          }
+        },
+        "post": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/post"
+          }
+        },
+        "transition_in": {
+          "$ref": "#/$defs/transition"
+        },
+        "sfx": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sfx"
+          }
+        },
+        "texture": {
+          "enum": [
+            "inherit",
+            "none"
+          ],
+          "default": "inherit"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "layerBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "start": {
+          "type": "number",
+          "description": "Seconds relative to the shot start (default 0)."
+        },
+        "end": {
+          "type": "number",
+          "description": "Seconds relative to the shot start (default: shot end)."
+        },
+        "lock": {
+          "enum": [
+            "world",
+            "screen"
+          ],
+          "description": "world = moves with the shot camera; screen = fixed to the frame (HUD). Default: world for media, screen for graphics/text."
+        },
+        "enter": {
+          "$ref": "#/$defs/anim"
+        },
+        "exit": {
+          "$ref": "#/$defs/anim"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "blend": {
+          "$ref": "#/$defs/blend"
+        },
+        "box": {
+          "$ref": "#/$defs/box"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "cue_word": {
+          "type": "string",
+          "description": "Sync this layer's start to the moment this word is spoken inside the shot (resolved by retime). E.g. 'billion' makes a counter land on the word."
+        }
+      }
+    },
+    "layer": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "discriminator": {
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/videoLayer"
+        },
+        {
+          "$ref": "#/$defs/imageLayer"
+        },
+        {
+          "$ref": "#/$defs/parallaxLayer"
+        },
+        {
+          "$ref": "#/$defs/backgroundLayer"
+        },
+        {
+          "$ref": "#/$defs/textLayer"
+        },
+        {
+          "$ref": "#/$defs/counterLayer"
+        },
+        {
+          "$ref": "#/$defs/annotationLayer"
+        },
+        {
+          "$ref": "#/$defs/cardLayer"
+        },
+        {
+          "$ref": "#/$defs/splitLayer"
+        },
+        {
+          "$ref": "#/$defs/barsLayer"
+        },
+        {
+          "$ref": "#/$defs/timelineLayer"
+        },
+        {
+          "$ref": "#/$defs/fxLayer"
+        },
+        {
+          "$ref": "#/$defs/customLayer"
+        }
+      ]
+    },
+    "mediaProps": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "Path relative to the project assets dir, or https URL. Leave empty until the asset is acquired (animatic shows a placeholder)."
+        },
+        "asset": {
+          "$ref": "#/$defs/asset"
+        },
+        "fit": {
+          "enum": [
+            "cover",
+            "contain",
+            "blur_fill"
+          ],
+          "default": "cover",
+          "description": "blur_fill = contained media over a blurred, zoomed copy of itself (great for vertical or low-res sources)."
+        },
+        "focus": {
+          "$ref": "#/$defs/point",
+          "description": "Which part of the media stays in frame when cropping (object-position)."
+        },
+        "grade": {
+          "$ref": "#/$defs/grade"
+        },
+        "camera": {
+          "$ref": "#/$defs/camera",
+          "description": "Layer-local motion, in addition to the shot camera."
+        },
+        "blur": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60,
+          "description": "Gaussian blur px (for background plates)."
+        },
+        "darken": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Black overlay opacity to push media back behind text."
+        },
+        "mirror": {
+          "type": "boolean"
+        }
+      }
+    },
+    "videoLayer": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        },
+        {
+          "$ref": "#/$defs/mediaProps"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "video"
+        },
+        "trim": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Start this many seconds into the source clip."
+        },
+        "speed": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 4,
+          "default": 1
+        },
+        "freeze_at": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Layer-relative second at which the clip freezes (documentary freeze-frame)."
+        },
+        "volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0,
+          "description": "Source audio volume (default muted)."
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "imageLayer": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        },
+        {
+          "$ref": "#/$defs/mediaProps"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "image"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "parallaxLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "planes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "parallax"
+        },
+        "camera": {
+          "$ref": "#/$defs/camera",
+          "description": "Defaults to the shot camera. Planes move by depth."
+        },
+        "planes": {
+          "type": "array",
+          "minItems": 2,
+          "description": "Far to near. A plane is either media (src/asset) or text.",
+          "items": {
+            "type": "object",
+            "required": [
+              "depth"
+            ],
+            "properties": {
+              "depth": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "0 = far background, 1 = nearest foreground"
+              },
+              "src": {
+                "type": "string"
+              },
+              "asset": {
+                "$ref": "#/$defs/asset"
+              },
+              "fit": {
+                "enum": [
+                  "cover",
+                  "contain"
+                ]
+              },
+              "focus": {
+                "$ref": "#/$defs/point"
+              },
+              "box": {
+                "$ref": "#/$defs/box"
+              },
+              "grade": {
+                "$ref": "#/$defs/grade"
+              },
+              "blur": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 40
+              },
+              "text": {
+                "type": "string",
+                "description": "Text plane (e.g. giant word between background and cut-out subject)."
+              },
+              "font": {
+                "$ref": "#/$defs/fontRole"
+              },
+              "color": {
+                "$ref": "#/$defs/color"
+              },
+              "size": {
+                "type": "number",
+                "description": "Text size in % of frame height"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "backgroundLayer": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "background"
+        },
+        "style": {
+          "enum": [
+            "solid",
+            "linear",
+            "radial",
+            "mesh",
+            "grid",
+            "paper",
+            "dots",
+            "noise"
+          ],
+          "default": "solid"
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/color"
+          },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "angle": {
+          "type": "number"
+        },
+        "animated": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "textLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "text": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "style": {
+          "enum": [
+            "title",
+            "slam",
+            "kinetic",
+            "typewriter",
+            "reveal",
+            "lower_third",
+            "label",
+            "quote",
+            "stamp",
+            "marker",
+            "outline",
+            "chapter"
+          ],
+          "default": "title"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "size": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Font size in % of frame height (style sets a sensible default)."
+        },
+        "font": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "highlight": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Words rendered in the accent color."
+        },
+        "highlight_color": {
+          "$ref": "#/$defs/color"
+        },
+        "align": {
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "uppercase": {
+          "type": "boolean"
+        },
+        "backdrop": {
+          "enum": [
+            "none",
+            "box",
+            "blur",
+            "shadow"
+          ],
+          "default": "shadow"
+        },
+        "rotate": {
+          "type": "number"
+        },
+        "word_times": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "kinetic only: shot-relative time each word appears (from retime). Otherwise spread evenly."
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "counterLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "to"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "counter"
+        },
+        "from": {
+          "type": "number",
+          "default": 0
+        },
+        "to": {
+          "type": "number"
+        },
+        "decimals": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "default": 0
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "count_duration": {
+          "type": "number",
+          "minimum": 0.1,
+          "default": 1.6
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "size": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "separator": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "annotationLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "shape"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "annotation"
+        },
+        "shape": {
+          "enum": [
+            "circle",
+            "box",
+            "underline",
+            "arrow",
+            "cross",
+            "pin",
+            "route",
+            "bracket",
+            "spotlight",
+            "highlight"
+          ]
+        },
+        "at": {
+          "$ref": "#/$defs/point",
+          "description": "circle / pin / spotlight centre"
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 80,
+          "description": "% of frame height"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/point"
+          },
+          "description": "arrow (from→to), route (polyline), underline (start,end)"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "stroke": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 30,
+          "default": 6
+        },
+        "label": {
+          "type": "string"
+        },
+        "draw_duration": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0.6
+        },
+        "dashed": {
+          "type": "boolean"
+        },
+        "hand_drawn": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wobbly marker look instead of perfect geometry."
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "cardLayer": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        },
+        {
+          "$ref": "#/$defs/mediaProps"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "card"
+        },
+        "frame": {
+          "enum": [
+            "polaroid",
+            "paper",
+            "torn",
+            "phone",
+            "browser",
+            "tv",
+            "plain",
+            "rounded"
+          ],
+          "default": "rounded"
+        },
+        "is_video": {
+          "type": "boolean",
+          "description": "Treat src as video even if the extension is ambiguous."
+        },
+        "trim": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rotate": {
+          "type": "number"
+        },
+        "tilt": {
+          "type": "number",
+          "minimum": -45,
+          "maximum": 45,
+          "description": "3D Y-axis tilt in degrees"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "shadow": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "splitLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "panels"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "split"
+        },
+        "layout": {
+          "enum": [
+            "two_vertical",
+            "two_horizontal",
+            "three_vertical",
+            "grid_4",
+            "pip"
+          ],
+          "default": "two_vertical"
+        },
+        "gap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 0.4
+        },
+        "gap_color": {
+          "$ref": "#/$defs/color"
+        },
+        "stagger": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0.25
+        },
+        "panels": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "type": "string"
+              },
+              "asset": {
+                "$ref": "#/$defs/asset"
+              },
+              "is_video": {
+                "type": "boolean"
+              },
+              "trim": {
+                "type": "number",
+                "minimum": 0
+              },
+              "label": {
+                "type": "string"
+              },
+              "grade": {
+                "$ref": "#/$defs/grade"
+              },
+              "focus": {
+                "$ref": "#/$defs/point"
+              },
+              "camera": {
+                "$ref": "#/$defs/camera"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "barsLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "bars"
+        },
+        "title": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "orientation": {
+          "enum": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "horizontal"
+        },
+        "highlight": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Index of the bar to emphasise in accent color."
+        },
+        "data": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number"
+              },
+              "color": {
+                "$ref": "#/$defs/color"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "timelineLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "timeline"
+        },
+        "highlight": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "fxLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "effect"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "fx"
+        },
+        "effect": {
+          "enum": [
+            "grain",
+            "vignette",
+            "light_leak",
+            "letterbox",
+            "flash",
+            "scanlines",
+            "vhs",
+            "dust",
+            "film_burn",
+            "particles",
+            "tint",
+            "viewfinder",
+            "rec",
+            "scrim"
+          ]
+        },
+        "intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.5
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "kind": {
+          "enum": [
+            "bokeh",
+            "embers",
+            "dust",
+            "snow"
+          ],
+          "description": "particles only"
+        },
+        "side": {
+          "enum": [
+            "bottom",
+            "top",
+            "left",
+            "right",
+            "full",
+            "center"
+          ],
+          "description": "scrim only: where the darkening gradient sits"
+        },
+        "seed": {
+          "type": "integer"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "customLayer": {
+      "type": "object",
+      "required": [
+        "type",
+        "component"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/$defs/layerBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "const": "custom"
+        },
+        "component": {
+          "type": "string",
+          "description": "Name registered in engine/src/custom/index.ts (e.g. DotGlobe, NetworkGraph, ParticleField). Unregistered names render as a placeholder."
+        },
+        "props": {
+          "type": "object"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "captions": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "style": {
+          "enum": [
+            "pop",
+            "karaoke",
+            "minimal"
+          ],
+          "default": "pop"
+        },
+        "position": {
+          "enum": [
+            "bottom",
+            "center",
+            "top"
+          ],
+          "default": "bottom"
+        },
+        "max_words": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 3
+        },
+        "src": {
+          "type": "string",
+          "description": "Transcript JSON (word timestamps) relative to the project dir. Inlined by prepare."
+        },
+        "font": {
+          "$ref": "#/$defs/fontRole"
+        },
+        "uppercase": {
+          "type": "boolean",
+          "default": true
+        },
+        "hide_during": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Shot ids where captions are hidden (e.g. full-screen typography shots)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "voiceover": {
+          "type": "object",
+          "required": [
+            "src"
+          ],
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "volume": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2,
+              "default": 1
+            },
+            "offset": {
+              "type": "number",
+              "default": 0,
+              "description": "Timeline second where the voiceover starts."
+            }
+          },
+          "additionalProperties": false
+        },
+        "music": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "src"
+            ],
+            "properties": {
+              "src": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0,
+                "default": 0
+              },
+              "end": {
+                "type": "number",
+                "minimum": 0
+              },
+              "offset": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Skip this many seconds into the track."
+              },
+              "volume": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 0.25
+              },
+              "fade_in": {
+                "type": "number",
+                "minimum": 0,
+                "default": 1
+              },
+              "fade_out": {
+                "type": "number",
+                "minimum": 0,
+                "default": 1.5
+              },
+              "duck": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 0.45,
+                "description": "Volume multiplier while the voice is speaking (needs a transcript)."
+              },
+              "mood": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "sfx_volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
