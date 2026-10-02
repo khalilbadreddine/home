@@ -25,6 +25,8 @@ import "@fontsource/jetbrains-mono/700.css";
 import "@fontsource/permanent-marker/400.css";
 import "@fontsource/caveat/400.css";
 import "@fontsource/caveat/700.css";
+// Japanese/Chinese glyphs: every font stack falls back to Noto Serif JP (see lib/theme.ts).
+import "@fontsource/noto-serif-jp/700.css";
 import { RemotionRoot } from "./Root";
 
 registerRoot(RemotionRoot);

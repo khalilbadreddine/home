@@ -1,6 +1,7 @@
 import type { Color, FontName, FontRole, Palette, Treatment } from "../types";
 
-const FALLBACK_STACK = "Inter, Helvetica, Arial, sans-serif";
+// Noto Serif JP catches kanji/kana that the Latin faces lack (神風, ひらがな...).
+const FALLBACK_STACK = 'Inter, "Noto Serif JP", Helvetica, Arial, sans-serif';
 
 export const DEFAULT_PALETTE: Palette = {
   bg: "#0b0b0f",

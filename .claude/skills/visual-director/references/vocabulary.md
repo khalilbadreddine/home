@@ -4,6 +4,8 @@ This is the complete list. If a technique isn't here, the engine can't do it
 yet; build it with the `director-engine` skill before planning around it.
 Field-level truth lives in `schema/visual-plan.schema.json`.
 
+**Japanese / Chinese text.** Any text field can contain kanji or kana (神風, ひらがな); it renders in Noto Serif JP automatically.
+
 **Units.** Shot `start`/`end` are absolute seconds. Layer `start`/`end`, sfx
 `at` and post `start`/`end` are seconds **relative to the shot start**.
 `x/y/w/h` are percent of the frame. Sizes (`size`) are percent of frame height.
@@ -156,6 +158,7 @@ Counts with an exponential ease and pops when it lands. Use `cue_word` so it lan
 | `WorldMap` | `style` (dark, paper, blueprint, light), `from`/`to` `{lon, lat, zoom}` (zoom 1 = world), `highlight`/`highlight2` (Natural Earth country names: "Morocco", "United States of America", "Dem. Rep. Congo"...), `markers` `[{lon, lat, label, at}]`, `routes` `[{from, to, at}]`, `labels` `[{lon, lat, text}]` | Any place, border, trade route, journey, invasion, spread. The camera move is inside the map, so leave shot camera `static`. |
 | `DotGlobe` | `from`/`to` `{lon, lat}`, `spin`, `size`, `x`, `y`, `markers`, `arcs` `[{from, to, at}]`, `dot_color` | Global scale, connections between continents, "the whole world". |
 | `FallingPetals` | `kind` (petal, leaf, confetti), `count`, `wind`, `speed`, `size`, `color` | Cherry blossoms (Japan, spring, transience), autumn leaves (endings, decline), confetti (victories). Put it above the base image, below text. |
+| `ShojiDoor` | `mode` (open, close, hold), `at`, `duration`, `max`, `open`, `gap` (never closes tighter, e.g. 0.12 = "almost shut"), `keys` `[{at, open}]` for open → shut → open | Sliding paper doors over the shot (put it as the TOP layer): opening up, closing off, isolation, a reveal. Short closes (≤0.45 s) slam and rebound; pair with `impact`. |
 | `NetworkGraph` | `nodes`, `seed`, `hub_label`, `spread` (0–1), `color` | Spread, virality, contagion, supply chains, "everything is connected". |
 New ones: `/new-effect`. Unregistered names render as a placeholder and fail validation.
 

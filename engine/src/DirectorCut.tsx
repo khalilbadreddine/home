@@ -19,7 +19,7 @@ export const DirectorCut: React.FC<VisualPlan> = (plan) => {
   const { fps } = useVideoConfig();
   const treatment = { ...plan.treatment, palette: { ...DEFAULT_PALETTE, ...plan.treatment.palette } };
   const p: VisualPlan = { ...plan, treatment };
-  useFontsReady(treatment);
+  useFontsReady(treatment, plan);
   const windows = shotWindows(p);
   const total = planDuration(p);
   const totalFrames = Math.ceil(total * fps);

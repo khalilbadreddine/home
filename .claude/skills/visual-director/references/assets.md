@@ -17,6 +17,19 @@ Default AI image budget ≈ 1 per 30–45 s of video, spent on heroes and
 impossible-to-find moments, unless `brief.md` says otherwise. Always tell the
 user the count and estimated cost before generating.
 
+## Plates: one drawing, many shots
+
+For illustrated videos, plan AI images as **plates** with a fixed path and reuse
+them: wide on first appearance, then details via camera `target`/`custom` moves,
+as polaroid `card`s, in `split`s, and as callbacks later in the film.
+- Give the layer a planned `src` (e.g. `plates/himiko.png`) and put the `prompt`
+  on its first use; later uses only need the same `src` (+ a short description).
+- `npm run assets -- <project> list` and `brief` merge slots that share a `src`, so
+  each plate is generated once. Creating the file at the planned path is enough;
+  no `set` needed.
+- Ask for plates at the highest resolution the provider offers: detail shots
+  zoom to 1.5–2×.
+
 ## Writing stock queries
 
 - 2–4 keywords, **subject first**, plus a **POV word**: drone/aerial, close-up/macro,

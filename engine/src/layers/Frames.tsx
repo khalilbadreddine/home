@@ -21,7 +21,8 @@ export const CardView: React.FC<{ layer: CardLayer }> = ({ layer }) => {
   const frame = layer.frame ?? "rounded";
   const isVideo = layer._isVideo ?? isVideoSrc(layer.src, layer.is_video);
   const missing = !layer.src || layer._missing;
-  const enterP = easeOutBack(prog(t, 0, 0.55), 1.2);
+  // enter:{type:"none"} keeps a card still (e.g. it was already on screen in the previous shot).
+  const enterP = layer.enter?.type === "none" ? 1 : easeOutBack(prog(t, 0, 0.55), 1.2);
   const float = Math.sin(shotT * 1.3 + seed) * unit * 0.35;
   const rot = (layer.rotate ?? 0) + (1 - enterP) * 6;
   const cam = layer.camera ? cameraState(layer.camera, prog(seqT, 0, seqDur), shotT, seed + 9) : undefined;
@@ -51,7 +52,7 @@ export const CardView: React.FC<{ layer: CardLayer }> = ({ layer }) => {
           width: `${b.w}%`,
           height: `${b.h}%`,
           transform: `translateY(${float + (1 - enterP) * unit * 8}px) rotate(${rot}deg) rotateY(${layer.tilt ?? 0}deg) scale(${0.85 + 0.15 * enterP})`,
-          opacity: Math.min(1, prog(t, 0, 0.2) * 1.5),
+          opacity: layer.enter?.type === "none" ? 1 : Math.min(1, prog(t, 0, 0.2) * 1.5),
           background: outerBg,
           borderRadius: radius,
           padding: `${frame === "browser" ? unit * 3.4 : pad.p}px ${pad.p}px ${pad.pb}px ${pad.p}px`,

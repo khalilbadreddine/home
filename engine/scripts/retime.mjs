@@ -219,6 +219,15 @@ function main() {
       const silence = s.end - lastEnd[i];
       if (silence + 0.15 < s.hold) pauses.push({ shot: s.id, after: words(s.script).slice(-3).join(" "), want: s.hold, has: +silence.toFixed(2) });
     });
+    // Scriptless shots (title cards, breaths) live in silence: say where the voiceover needs a pause.
+    shots.forEach((s, i) => {
+      if (tokens(s.script).length || i === 0) return;
+      const got = s.end - s.start;
+      if (got < oldDur[i] * 0.7 && got < oldDur[i] - 0.3) {
+        const prev = shots.slice(0, i).reverse().find((x) => tokens(x.script).length);
+        pauses.push({ shot: s.id, after: prev ? words(prev.script).slice(-3).join(" ") : "(start)", want: +oldDur[i].toFixed(2), has: +got.toFixed(2) });
+      }
+    });
     const unmatchedShots = shots.filter((s, i) => tokens(s.script).length && first[i] === undefined).map((s) => s.id);
     report = `matched ${matched}/${flat.length} script words to ${T.length} transcript words (${vo?.src ?? path.basename(tPath)})`;
     if (unmatchedShots.length) report += `\n▲ could not place: ${unmatchedShots.join(", ")} (script text differs from the voiceover?)`;

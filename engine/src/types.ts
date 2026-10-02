@@ -15,7 +15,8 @@ export type FontName =
   | "Space Grotesk"
   | "JetBrains Mono"
   | "Permanent Marker"
-  | "Caveat";
+  | "Caveat"
+  | "Noto Serif JP";
 export type FontRole = "display" | "body" | "accent" | "mono";
 export type Ease = "linear" | "in" | "out" | "in_out" | "snap" | "smooth";
 export type Grade =

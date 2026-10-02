@@ -16,7 +16,7 @@ const GRAPHIC = new Set(["text", "counter", "annotation", "bars", "timeline", "c
 const FANCY = new Set(["whip_left", "whip_right", "whip_up", "whip_down", "zoom_through", "zoom_out", "glitch", "iris", "film_burn", "slide_left", "slide_right", "slide_up", "wipe_left", "wipe_right"]);
 const norm = (w) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 
-export function validatePlan(plan) {
+export function validatePlan(plan, opts = {}) {
   const errors = [];
   const warnings = [];
   const info = [];
@@ -88,7 +88,8 @@ export function validatePlan(plan) {
       continue;
     }
     assetsTotal++;
-    if (!o.src) assetsTodo++;
+    const fileMissing = o.src && opts.assetsDir && !/^(https?:|data:)/.test(o.src) && !fs.existsSync(path.join(opts.assetsDir, o.src));
+    if (!o.src || fileMissing) assetsTodo++;
     const k = o.asset?.kind ?? (o.src ? "provided" : "unknown");
     assetKinds[k] = (assetKinds[k] ?? 0) + 1;
     if (o.asset && !o.src) {
@@ -109,7 +110,15 @@ export function validatePlan(plan) {
     if (l.type === "custom") return `custom:${l.component}`;
     return l.type;
   };
-  const sig = (s) => `${baseOf(s).split(":")[0]}|${s.camera?.move ?? "static"}|${(s.layers ?? []).some((l) => GRAPHIC.has(l.type)) ? "g" : "-"}`;
+  const moveOf = (s) => {
+    if (s.camera?.move && s.camera.move !== "static") return s.camera.move;
+    for (const l of s.layers ?? []) {
+      if (l.camera?.move && l.camera.move !== "static") return l.camera.move;
+      if (l.type === "split") for (const pnl of l.panels ?? []) if (pnl.camera?.move) return pnl.camera.move;
+    }
+    return "static";
+  };
+  const sig = (s) => `${baseOf(s).split(":")[0]}|${moveOf(s)}|${(s.layers ?? []).some((l) => GRAPHIC.has(l.type)) ? "g" : "-"}`;
 
   // hook pacing
   const hookShots = shots.filter((s) => s.start < 15);
@@ -142,7 +151,16 @@ export function validatePlan(plan) {
     W("SLIDESHOW", `${kenBurnsOnly.length}/${n} shots are a single still with a slow zoom; that is the slideshow look. Use footage, parallax, cards, split screens, annotations or typography for at least half of them`, "plan");
   const dead = shots.filter((s) => {
     const ls = s.layers ?? [];
-    const moving = ls.some((l) => l.type === "video" || l.type === "custom" || l.type === "parallax" || l.camera || (l.type === "fx" && ["particles", "light_leak"].includes(l.effect)));
+    const moving = ls.some(
+      (l) =>
+        l.type === "video" ||
+        l.type === "custom" ||
+        l.type === "parallax" ||
+        l.type === "card" ||
+        l.camera ||
+        (l.type === "split" && (l.panels ?? []).some((pnl) => pnl.camera || pnl.is_video)) ||
+        (l.type === "fx" && ["particles", "light_leak"].includes(l.effect)),
+    );
     return !moving && (s.camera?.move ?? "static") === "static" && !ls.some((l) => GRAPHIC.has(l.type));
   });
   dead.forEach((s) => W("DEAD_FRAME", "nothing moves in this shot (static camera, stills, no animated graphics)", s.id));
@@ -256,7 +274,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const args = parseArgs();
   const { planPath } = resolveProject(args._[0]);
   const plan = readJson(planPath);
-  const r = validatePlan(plan);
+  const r = validatePlan(plan, { assetsDir: path.join(path.dirname(planPath), "assets") });
   if (args.json) console.log(JSON.stringify(r, null, 2));
   else printReport(r, path.relative(process.cwd(), planPath));
   process.exit(r.errors.length || (args.strict && r.warnings.length) ? 1 : 0);

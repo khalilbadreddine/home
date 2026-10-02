@@ -3,6 +3,7 @@ import type { CustomProps } from "./types";
 import { DotGlobe } from "./DotGlobe";
 import { FallingPetals } from "./FallingPetals";
 import { NetworkGraph } from "./NetworkGraph";
+import { ShojiDoor } from "./ShojiDoor";
 import { WorldMap } from "./WorldMap";
 
 /**
@@ -17,5 +18,6 @@ export const CUSTOM_COMPONENTS: Record<string, React.FC<CustomProps>> = {
   DotGlobe,
   FallingPetals,
   NetworkGraph,
+  ShojiDoor,
   WorldMap,
 };

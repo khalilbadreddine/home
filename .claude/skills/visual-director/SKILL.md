@@ -89,6 +89,7 @@ For each beat, walk the **question ladder** (`visual-thinking.md`):
 
 Then write the shot into `visual_plan.json`. Rules of thumb:
 
+- For illustrated videos, plan **plates** (see `assets.md`): one AI drawing serves a wide shot, a detail, a card and a callback.
 - Make stock footage **specific**: grade it into the treatment, crop with `focus`,
   label it (place/date), annotate the detail, freeze it, slow it, frame it in a card.
 - **Vary scale and technique** across neighbours: wide → detail → graphic → face → map.

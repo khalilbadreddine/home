@@ -47,12 +47,38 @@ function rows(plan, project) {
       orientation: a.orientation,
       sources: a.sources,
       fallback: a.fallback,
-      suggested: suggestedPath(slot.ref, a),
+      suggested: o.src && !exists ? o.src : suggestedPath(slot.ref, a),
       intent: slot.shot?.intent,
+      refs: [slot.ref],
     });
+  }
+  return groupShared(out);
+}
+
+/**
+ * Plates: several shots may plan the same file (one AI illustration framed
+ * wide, then in detail). Merge those slots so it's acquired once; the first
+ * slot that carries a prompt/description describes it.
+ */
+function groupShared(rows) {
+  const byKey = new Map();
+  const out = [];
+  for (const r of rows) {
+    const key = r.src ? `src:${r.src}` : `ref:${r.ref}`;
+    const prev = byKey.get(key);
+    if (!prev) {
+      byKey.set(key, r);
+      out.push(r);
+      continue;
+    }
+    prev.refs.push(r.ref);
+    for (const k of ["description", "query", "alternates", "prompt", "needs_cutout", "orientation", "sources", "fallback", "intent"]) prev[k] ??= r[k];
+    if (prev.kind === "?" || prev.kind === "provided") prev.kind = r.kind;
   }
   return out;
 }
+
+const DONE = new Set(["found", "generated", "provided"]);
 
 function findSlot(plan, ref) {
   for (const slot of mediaSlots(plan)) if (slot.ref === ref) return slot;
@@ -67,22 +93,22 @@ function main() {
 
   if (cmd === "list") {
     let r = rows(plan, project);
-    if (args.todo) r = r.filter((x) => x.status !== "found" && x.status !== "generated" && x.status !== "provided");
+    if (args.todo) r = r.filter((x) => !DONE.has(x.status));
     if (args.json) return console.log(JSON.stringify(r, null, 2));
     if (!r.length) return console.log("✓ nothing to acquire");
     for (const x of r) {
-      console.log(`${x.status === "found" || x.status === "generated" ? "✓" : "○"} ${x.ref.padEnd(12)} ${x.time.padEnd(14)} ${x.kind.padEnd(14)} ${x.src ?? "→ " + x.suggested}`);
+      console.log(`${DONE.has(x.status) ? "✓" : "○"} ${x.ref.padEnd(12)} ${x.time.padEnd(14)} ${x.kind.padEnd(14)} ${x.status === "missing-file" ? "→ " + x.src : x.src ?? "→ " + x.suggested}${x.refs.length > 1 ? `  (used by ${x.refs.length} shots: ${x.refs.map((q) => q.split(".")[0]).join(", ")})` : ""}`);
       if (x.description) console.log(`    what:   ${x.description}`);
       if (x.query) console.log(`    query:  ${x.query}${x.alternates?.length ? `  | alt: ${x.alternates.join(" / ")}` : ""}`);
       if (x.prompt) console.log(`    prompt: ${x.prompt}`);
     }
-    const todo = r.filter((x) => x.status !== "found" && x.status !== "generated" && x.status !== "provided").length;
+    const todo = r.filter((x) => !DONE.has(x.status)).length;
     console.log(`\n${r.length - todo}/${r.length} acquired`);
     return;
   }
 
   if (cmd === "brief") {
-    const r = rows(plan, project).filter((x) => !x.src);
+    const r = rows(plan, project).filter((x) => !DONE.has(x.status) && (!x.src || x.status === "missing-file"));
     const style = plan.treatment.ai_image_style ? `, ${plan.treatment.ai_image_style}` : "";
     const groups = {};
     r.forEach((x) => (groups[x.kind] ??= []).push(x));
@@ -90,13 +116,13 @@ function main() {
     for (const [kind, list] of Object.entries(groups)) {
       md += `\n## ${kind} (${list.length})\n`;
       for (const x of list) {
-        md += `\n### ${x.ref} · ${x.time}${x.duration ? ` (${x.duration}s)` : ""}\n- **Shot intent:** ${x.intent ?? ""}\n- **What:** ${x.description ?? ""}\n`;
+        md += `\n### ${x.ref} · ${x.time}${x.duration ? ` (${x.duration}s)` : ""}${x.refs.length > 1 ? ` · used by ${x.refs.length} shots` : ""}\n- **Shot intent:** ${x.intent ?? ""}\n- **What:** ${x.description ?? ""}\n`;
         if (x.query) md += `- **Query:** \`${x.query}\`${x.alternates?.length ? ` · alternates: ${x.alternates.map((a) => `\`${a}\``).join(", ")}` : ""}\n`;
         if (x.prompt) md += `- **Prompt:** ${x.prompt}${style}\n`;
         if (x.min_duration) md += `- **Min clip length:** ${x.min_duration}s\n`;
         if (x.needs_cutout) md += `- **Cut-out:** run background removal, save PNG with alpha\n`;
         if (x.fallback) md += `- **Fallback:** ${x.fallback}\n`;
-        md += `- **Save as:** \`assets/${x.suggested}\`\n`;
+        md += `- **Save as:** \`assets/${x.suggested}\`${x.status === "missing-file" ? " (planned path: no `set` needed, just create the file)" : ""}\n`;
       }
     }
     const out = path.join(project.dir, "asset_brief.md");
