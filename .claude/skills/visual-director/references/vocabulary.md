@@ -155,6 +155,7 @@ Counts with an exponential ease and pops when it lands. Use `cue_word` so it lan
 |---|---|---|
 | `WorldMap` | `style` (dark, paper, blueprint, light), `from`/`to` `{lon, lat, zoom}` (zoom 1 = world), `highlight`/`highlight2` (Natural Earth country names: "Morocco", "United States of America", "Dem. Rep. Congo"...), `markers` `[{lon, lat, label, at}]`, `routes` `[{from, to, at}]`, `labels` `[{lon, lat, text}]` | Any place, border, trade route, journey, invasion, spread. The camera move is inside the map, so leave shot camera `static`. |
 | `DotGlobe` | `from`/`to` `{lon, lat}`, `spin`, `size`, `x`, `y`, `markers`, `arcs` `[{from, to, at}]`, `dot_color` | Global scale, connections between continents, "the whole world". |
+| `FallingPetals` | `kind` (petal, leaf, confetti), `count`, `wind`, `speed`, `size`, `color` | Cherry blossoms (Japan, spring, transience), autumn leaves (endings, decline), confetti (victories). Put it above the base image, below text. |
 | `NetworkGraph` | `nodes`, `seed`, `hub_label`, `spread` (0–1), `color` | Spread, virality, contagion, supply chains, "everything is connected". |
 New ones: `/new-effect`. Unregistered names render as a placeholder and fail validation.
 

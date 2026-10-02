@@ -6,6 +6,38 @@
 import fs from "node:fs";
 import path from "node:path";
 import { SFX_LIBRARY, ffprobeDuration, findTranscript, isRemote, isVideoPath, loadWords, mediaSlots, parseArgs, readJson, resolveProject, writeJson } from "./lib.mjs";
+import { align } from "./retime.mjs";
+
+const norm = (w) => w.toLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N}]/gu, "");
+
+/**
+ * Captions should spell things the way the script does (speech-to-text mangles
+ * names: "Kyoto" → "Feildo"). Align the script's words to the transcript and
+ * keep the transcript's timing; words it missed are interpolated inside their shot.
+ */
+export function scriptCaptionWords(plan, tWords) {
+  const script = [];
+  for (const shot of plan.shots) {
+    for (const w of (shot.script ?? "").split(/\s+/).filter(Boolean)) if (norm(w)) script.push({ word: w, n: norm(w), shot });
+  }
+  if (!script.length) return tWords;
+  const map = align(script.map((x) => x.n), tWords.map((w) => norm(w.word)));
+  if (map.size < script.length * 0.5) return tWords; // script and voiceover disagree too much: trust the transcript
+  const out = script.map((x, i) => (map.has(i) ? { word: x.word, start: tWords[map.get(i)].start, end: tWords[map.get(i)].end } : { word: x.word, start: NaN, end: NaN, shot: x.shot }));
+  for (let i = 0; i < out.length; i++) {
+    if (Number.isFinite(out[i].start)) continue;
+    let a = i - 1;
+    while (a >= 0 && !Number.isFinite(out[a].start)) a--;
+    let b = i + 1;
+    while (b < out.length && !Number.isFinite(out[b].start)) b++;
+    const lo = Math.max(a >= 0 ? out[a].end : 0, out[i].shot.start);
+    const hi = b < out.length ? out[b].start : out[i].shot.end;
+    const k = (i - a) / (b - a);
+    out[i].start = lo + (hi - lo) * k * 0.9;
+    out[i].end = Math.min(hi, out[i].start + 0.35);
+  }
+  return out.map(({ word, start, end }) => ({ word, start, end }));
+}
 
 export function prepare(project, opts = {}) {
   const plan = structuredClone(readJson(project.planPath));
@@ -76,7 +108,7 @@ export function prepare(project, opts = {}) {
   const offset = audio.voiceover?.offset ?? 0;
   words = words.map((w) => ({ ...w, start: w.start + offset, end: w.end + offset }));
   if (plan.captions?.enabled) {
-    if (words.length) plan.captions._words = words;
+    if (words.length) plan.captions._words = scriptCaptionWords(plan, words);
     else warnings.push("captions enabled but no transcript found (transcript.json); captions skipped");
   }
   const spans = [];

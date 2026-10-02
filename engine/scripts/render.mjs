@@ -5,6 +5,7 @@
 //                                            [--scale=0.5] [--crf=18] [--concurrency=N] [--out=path.mp4]
 //   --animatic  placeholders for missing media + shot id badges (review cut)
 //   --draft     half resolution, faster encode
+//   --muted     no audio track (visual review)
 import path from "node:path";
 import fs from "node:fs";
 import { bundle } from "@remotion/bundler";
@@ -62,6 +63,7 @@ async function main() {
     crf: args.crf ? Number(args.crf) : args.draft || args.animatic ? 26 : 18,
     concurrency: args.concurrency ? Number(args.concurrency) : undefined,
     pixelFormat: "yuv420p",
+    muted: !!args.muted,
     onProgress: ({ progress }) => {
       const pct = Math.floor(progress * 100);
       if (pct % 10 === 0 && pct !== lastPct) {

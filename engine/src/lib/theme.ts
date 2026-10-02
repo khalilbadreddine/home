@@ -65,3 +65,11 @@ export function rgba(hex: string, a: number): string {
   const { r, g, b } = hexToRgb(hex);
   return `rgba(${r},${g},${b},${a})`;
 }
+
+/** A shadow that separates text from its background: dark halo for light text, light halo for dark ink. */
+export function shadowFor(c: string): string {
+  if (!c.startsWith("#")) return "0 0.04em 0.35em rgba(0,0,0,0.55), 0 0 0.08em rgba(0,0,0,0.4)";
+  const { r, g, b } = hexToRgb(c);
+  const lum = (r * 299 + g * 587 + b * 114) / 1000;
+  return lum > 110 ? "0 0.04em 0.35em rgba(0,0,0,0.55), 0 0 0.08em rgba(0,0,0,0.4)" : "0 0 0.25em rgba(255,250,240,0.45)";
+}

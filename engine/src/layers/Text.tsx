@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import type { Position, TextLayer } from "../types";
 import { useShot } from "../lib/context";
-import { color, font, rgba, weightFor } from "../lib/theme";
+import { color, font, rgba, shadowFor, weightFor } from "../lib/theme";
 import { easeFn, easeOutBack, easeOutCubic, prog } from "../lib/easing";
 import { fbm } from "../lib/noise";
 import { useLayerTime } from "../lib/hooks";
@@ -14,7 +14,7 @@ const DEFAULT_SIZE: Record<string, number> = {
   typewriter: 4.4,
   reveal: 8,
   lower_third: 3.6,
-  label: 2.2,
+  label: 2.7,
   quote: 5.2,
   stamp: 8,
   marker: 5.5,
@@ -94,7 +94,7 @@ export const TextView: React.FC<{ layer: TextLayer }> = ({ layer }) => {
       ? undefined
       : layer.backdrop === "box" || layer.backdrop === "blur"
         ? undefined
-        : "0 0.04em 0.35em rgba(0,0,0,0.55), 0 0 0.08em rgba(0,0,0,0.4)";
+        : shadowFor(fg);
   const backdropStyle: React.CSSProperties =
     layer.backdrop === "box"
       ? { background: rgba(palette.bg, 0.86), padding: "0.18em 0.4em", borderRadius: unit * 0.4 }
@@ -501,7 +501,7 @@ export const TextView: React.FC<{ layer: TextLayer }> = ({ layer }) => {
                 fontWeight: 600,
                 fontSize: size * 0.3,
                 letterSpacing: "0.06em",
-                color: palette.muted ?? fg,
+                color: layer.color ? fg : palette.muted ?? fg,
                 opacity: sub,
                 transform: `translateY(${(1 - sub) * 40}%)`,
                 textShadow: shadow,

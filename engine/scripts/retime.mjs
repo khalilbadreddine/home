@@ -198,7 +198,7 @@ function main() {
       const span = Math.max(0.4 * (k - i), nextStart - prevEnd);
       const weights = oldDur.slice(i, k);
       const wsum = weights.reduce((a, b) => a + b, 0) || 1;
-      let t = Math.min(prevEnd + 0.05, nextStart - 0.4 * (k - i));
+      let t = Math.min(prevEnd + Math.max(0.05, shots[i - 1].hold ?? 0), nextStart - 0.4 * (k - i));
       for (let q = i; q < k; q++) {
         starts[q] = t;
         t += (span * weights[q - i]) / wsum;

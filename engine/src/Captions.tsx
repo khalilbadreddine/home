@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import type { Captions, Treatment, VisualPlan, Word } from "./types";
 import { easeOutBack, prog } from "./lib/easing";
-import { font, weightFor } from "./lib/theme";
+import { font, hexToRgb, weightFor } from "./lib/theme";
 
 interface Page {
   words: Word[];
@@ -47,6 +47,9 @@ export const CaptionsView: React.FC<{ plan: VisualPlan; captions: Captions; trea
   if (current && hidden.includes(current.id)) return null;
 
   const palette = treatment.palette;
+  // Captions sit on a dark stroke/box, so they need a light text colour even when the palette ink is dark.
+  const { r, g, b } = hexToRgb(palette.fg);
+  const textColor = (r * 299 + g * 587 + b * 114) / 1000 > 140 ? palette.fg : "#f7f3ea";
   const role = captions.font ?? (style === "minimal" ? "body" : "display");
   const size = unit * (style === "minimal" ? 3.6 : style === "karaoke" ? 5 : 6.2);
   const upper = captions.uppercase ?? style !== "minimal";
@@ -84,21 +87,21 @@ export const CaptionsView: React.FC<{ plan: VisualPlan; captions: Captions; trea
           const p = easeOutBack(prog(t, w.start, w.start + 0.12), 2);
           const base: React.CSSProperties = {
             display: "inline-block",
-            color: palette.fg,
+            color: textColor,
             WebkitTextStroke: style === "minimal" ? undefined : `${unit * 0.18}px rgba(0,0,0,0.85)`,
             paintOrder: "stroke fill",
             textShadow: "0 0.05em 0.25em rgba(0,0,0,0.6)",
           };
           if (style === "pop") {
             return (
-              <span key={i} style={{ ...base, color: active ? palette.accent : palette.fg, opacity: spoken ? 1 : 0, transform: `scale(${spoken ? (active ? 1.08 : 1) * (0.7 + 0.3 * p) : 0.7})` }}>
+              <span key={i} style={{ ...base, color: active ? palette.accent : textColor, opacity: spoken ? 1 : 0, transform: `scale(${spoken ? (active ? 1.08 : 1) * (0.7 + 0.3 * p) : 0.7})` }}>
                 {txt}
               </span>
             );
           }
           if (style === "karaoke") {
             return (
-              <span key={i} style={{ ...base, color: spoken ? (active ? palette.accent : palette.fg) : "rgba(255,255,255,0.45)" }}>
+              <span key={i} style={{ ...base, color: spoken ? (active ? palette.accent : textColor) : "rgba(255,255,255,0.45)" }}>
                 {txt}
               </span>
             );

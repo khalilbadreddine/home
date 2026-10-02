@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import type { BarsLayer, CounterLayer, TimelineLayer } from "../types";
 import { useShot } from "../lib/context";
-import { color, font, rgba, weightFor } from "../lib/theme";
+import { color, font, rgba, shadowFor, weightFor } from "../lib/theme";
 import { easeOutBack, easeOutCubic, prog } from "../lib/easing";
 import { useLayerTime } from "../lib/hooks";
 import { positionStyle } from "./Text";
@@ -41,7 +41,7 @@ export const CounterView: React.FC<{ layer: CounterLayer }> = ({ layer }) => {
             color: fg,
             fontVariantNumeric: "tabular-nums",
             transform: `scale(${pop})`,
-            textShadow: "0 0.04em 0.4em rgba(0,0,0,0.5)",
+            textShadow: shadowFor(fg),
             whiteSpace: "nowrap",
           }}
         >
@@ -60,7 +60,7 @@ export const CounterView: React.FC<{ layer: CounterLayer }> = ({ layer }) => {
               color: palette.fg,
               opacity: easeOutCubic(prog(t, 0.3, 0.8)),
               textTransform: "uppercase",
-              textShadow: "0 2px 12px rgba(0,0,0,0.6)",
+              textShadow: shadowFor(palette.fg),
             }}
           >
             {layer.label}
@@ -135,7 +135,7 @@ export const TimelineView: React.FC<{ layer: TimelineLayer }> = ({ layer }) => {
         const pulse = hl ? 1 + 0.15 * Math.max(0, Math.sin(t * 4)) : 1;
         return (
           <div key={i} style={{ position: "absolute", left: `${x}%`, top: "50%", transform: "translate(-50%, -50%)", display: "flex", flexDirection: "column", alignItems: "center", opacity: p }}>
-            <div style={{ position: "absolute", bottom: unit * 3.2, fontFamily: font("mono", treatment), fontWeight: 700, fontSize: unit * (hl ? 3.2 : 2.6), color: hl ? palette.accent : palette.fg, whiteSpace: "nowrap" }}>
+            <div style={{ position: "absolute", bottom: unit * 3.6, fontFamily: font("mono", treatment), fontWeight: 700, fontSize: unit * (hl ? 4.4 : 3.6), color: hl ? palette.accent : palette.fg, whiteSpace: "nowrap" }}>
               {it.date ?? ""}
             </div>
             <div
@@ -148,7 +148,7 @@ export const TimelineView: React.FC<{ layer: TimelineLayer }> = ({ layer }) => {
                 transform: `scale(${easeOutBack(p) * pulse})`,
               }}
             />
-            <div style={{ position: "absolute", top: unit * 3.2, fontFamily: font("body", treatment), fontWeight: 600, fontSize: unit * (hl ? 2.8 : 2.3), color: hl ? palette.fg : rgba(palette.fg, 0.75), textAlign: "center", width: unit * 26 }}>
+            <div style={{ position: "absolute", top: unit * 3.6, fontFamily: font("body", treatment), fontWeight: 600, fontSize: unit * (hl ? 3.2 : 2.8), color: hl ? palette.fg : rgba(palette.fg, 0.8), textAlign: "center", width: unit * 30 }}>
               {it.label}
             </div>
           </div>

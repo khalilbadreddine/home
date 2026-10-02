@@ -1,0 +1,824 @@
+{
+ "segments": [
+  {
+   "id": 1,
+   "start": 0.0,
+   "end": 5.34,
+   "text": "In the year 794, Japan's emperor moved into a brand-new capital, Hiyotou.",
+   "words": [
+    {
+     "word": " In",
+     "start": 0.0,
+     "end": 0.08,
+     "probability": 0.95
+    },
+    {
+     "word": " the",
+     "start": 0.08,
+     "end": 0.18,
+     "probability": 0.992
+    },
+    {
+     "word": " year",
+     "start": 0.18,
+     "end": 0.32,
+     "probability": 0.868
+    },
+    {
+     "word": " 794,",
+     "start": 0.32,
+     "end": 1.06,
+     "probability": 0.985
+    },
+    {
+     "word": " Japan's",
+     "start": 1.64,
+     "end": 2.24,
+     "probability": 0.992
+    },
+    {
+     "word": " emperor",
+     "start": 2.24,
+     "end": 2.44,
+     "probability": 0.775
+    },
+    {
+     "word": " moved",
+     "start": 2.44,
+     "end": 2.86,
+     "probability": 0.998
+    },
+    {
+     "word": " into",
+     "start": 2.86,
+     "end": 3.16,
+     "probability": 0.986
+    },
+    {
+     "word": " a",
+     "start": 3.16,
+     "end": 3.34,
+     "probability": 0.998
+    },
+    {
+     "word": " brand",
+     "start": 3.34,
+     "end": 3.56,
+     "probability": 0.998
+    },
+    {
+     "word": "-new",
+     "start": 3.56,
+     "end": 4.02,
+     "probability": 0.655
+    },
+    {
+     "word": " capital,",
+     "start": 4.02,
+     "end": 4.4,
+     "probability": 0.978
+    },
+    {
+     "word": " Hiyotou.",
+     "start": 4.82,
+     "end": 5.34,
+     "probability": 0.492
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "start": 7.0,
+   "end": 10.24,
+   "text": "And the emperor would live there, for more than a thousand years.",
+   "words": [
+    {
+     "word": " And",
+     "start": 7.0,
+     "end": 7.58,
+     "probability": 0.959
+    },
+    {
+     "word": " the",
+     "start": 7.58,
+     "end": 7.68,
+     "probability": 0.994
+    },
+    {
+     "word": " emperor",
+     "start": 7.68,
+     "end": 7.96,
+     "probability": 0.942
+    },
+    {
+     "word": " would",
+     "start": 7.96,
+     "end": 8.18,
+     "probability": 0.995
+    },
+    {
+     "word": " live",
+     "start": 8.18,
+     "end": 8.34,
+     "probability": 0.992
+    },
+    {
+     "word": " there,",
+     "start": 8.34,
+     "end": 8.58,
+     "probability": 0.999
+    },
+    {
+     "word": " for",
+     "start": 8.9,
+     "end": 9.1,
+     "probability": 0.997
+    },
+    {
+     "word": " more",
+     "start": 9.1,
+     "end": 9.28,
+     "probability": 0.998
+    },
+    {
+     "word": " than",
+     "start": 9.28,
+     "end": 9.46,
+     "probability": 0.992
+    },
+    {
+     "word": " a",
+     "start": 9.46,
+     "end": 9.58,
+     "probability": 0.815
+    },
+    {
+     "word": " thousand",
+     "start": 9.58,
+     "end": 9.84,
+     "probability": 0.982
+    },
+    {
+     "word": " years.",
+     "start": 9.84,
+     "end": 10.24,
+     "probability": 1.0
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "start": 11.2,
+   "end": 16.44,
+   "text": "For over two centuries, the shoggans kept Japan close to the outside world, then, in July",
+   "words": [
+    {
+     "word": " For",
+     "start": 11.2,
+     "end": 11.32,
+     "probability": 0.994
+    },
+    {
+     "word": " over",
+     "start": 11.32,
+     "end": 11.52,
+     "probability": 0.996
+    },
+    {
+     "word": " two",
+     "start": 11.52,
+     "end": 11.78,
+     "probability": 0.95
+    },
+    {
+     "word": " centuries,",
+     "start": 11.78,
+     "end": 12.26,
+     "probability": 0.999
+    },
+    {
+     "word": " the",
+     "start": 12.56,
+     "end": 12.64,
+     "probability": 0.995
+    },
+    {
+     "word": " shoggans",
+     "start": 12.64,
+     "end": 13.1,
+     "probability": 0.599
+    },
+    {
+     "word": " kept",
+     "start": 13.1,
+     "end": 13.4,
+     "probability": 0.998
+    },
+    {
+     "word": " Japan",
+     "start": 13.4,
+     "end": 13.68,
+     "probability": 0.995
+    },
+    {
+     "word": " close",
+     "start": 13.68,
+     "end": 14.16,
+     "probability": 0.938
+    },
+    {
+     "word": " to",
+     "start": 14.16,
+     "end": 14.38,
+     "probability": 0.998
+    },
+    {
+     "word": " the",
+     "start": 14.38,
+     "end": 14.5,
+     "probability": 0.997
+    },
+    {
+     "word": " outside",
+     "start": 14.5,
+     "end": 14.76,
+     "probability": 0.96
+    },
+    {
+     "word": " world,",
+     "start": 14.76,
+     "end": 15.28,
+     "probability": 0.997
+    },
+    {
+     "word": " then,",
+     "start": 15.8,
+     "end": 15.94,
+     "probability": 0.996
+    },
+    {
+     "word": " in",
+     "start": 16.2,
+     "end": 16.32,
+     "probability": 0.999
+    },
+    {
+     "word": " July",
+     "start": 16.32,
+     "end": 16.44,
+     "probability": 0.998
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "start": 17.14,
+   "end": 20.22,
+   "text": "1853, four black ships steamed into Aedou Bay.",
+   "words": [
+    {
+     "word": " 1853,",
+     "start": 17.14,
+     "end": 17.72,
+     "probability": 0.946
+    },
+    {
+     "word": " four",
+     "start": 18.18,
+     "end": 18.3,
+     "probability": 0.97
+    },
+    {
+     "word": " black",
+     "start": 18.3,
+     "end": 18.62,
+     "probability": 0.794
+    },
+    {
+     "word": " ships",
+     "start": 18.62,
+     "end": 18.92,
+     "probability": 0.991
+    },
+    {
+     "word": " steamed",
+     "start": 18.92,
+     "end": 19.3,
+     "probability": 0.782
+    },
+    {
+     "word": " into",
+     "start": 19.3,
+     "end": 19.6,
+     "probability": 0.995
+    },
+    {
+     "word": " Aedou",
+     "start": 19.6,
+     "end": 19.98,
+     "probability": 0.337
+    },
+    {
+     "word": " Bay.",
+     "start": 19.98,
+     "end": 20.22,
+     "probability": 0.733
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "start": 21.52,
+   "end": 26.82,
+   "text": "They breathed smoke, they carried cannons, and within fifteen years, the old Japan was",
+   "words": [
+    {
+     "word": " They",
+     "start": 21.52,
+     "end": 21.84,
+     "probability": 0.983
+    },
+    {
+     "word": " breathed",
+     "start": 21.84,
+     "end": 22.04,
+     "probability": 0.972
+    },
+    {
+     "word": " smoke,",
+     "start": 22.04,
+     "end": 22.5,
+     "probability": 0.998
+    },
+    {
+     "word": " they",
+     "start": 22.92,
+     "end": 23.08,
+     "probability": 0.989
+    },
+    {
+     "word": " carried",
+     "start": 23.08,
+     "end": 23.34,
+     "probability": 0.998
+    },
+    {
+     "word": " cannons,",
+     "start": 23.34,
+     "end": 23.66,
+     "probability": 0.863
+    },
+    {
+     "word": " and",
+     "start": 24.16,
+     "end": 24.4,
+     "probability": 0.996
+    },
+    {
+     "word": " within",
+     "start": 24.4,
+     "end": 24.62,
+     "probability": 0.976
+    },
+    {
+     "word": " fifteen",
+     "start": 24.62,
+     "end": 25.0,
+     "probability": 0.613
+    },
+    {
+     "word": " years,",
+     "start": 25.0,
+     "end": 25.44,
+     "probability": 0.999
+    },
+    {
+     "word": " the",
+     "start": 25.92,
+     "end": 25.98,
+     "probability": 0.998
+    },
+    {
+     "word": " old",
+     "start": 25.98,
+     "end": 26.14,
+     "probability": 0.974
+    },
+    {
+     "word": " Japan",
+     "start": 26.14,
+     "end": 26.42,
+     "probability": 0.982
+    },
+    {
+     "word": " was",
+     "start": 26.42,
+     "end": 26.82,
+     "probability": 0.999
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "start": 26.82,
+   "end": 27.02,
+   "text": "gone.",
+   "words": [
+    {
+     "word": " gone.",
+     "start": 26.82,
+     "end": 27.02,
+     "probability": 0.684
+    }
+   ]
+  }
+ ],
+ "word_timestamps": [
+  {
+   "word": " In",
+   "start": 0.0,
+   "end": 0.08,
+   "probability": 0.95
+  },
+  {
+   "word": " the",
+   "start": 0.08,
+   "end": 0.18,
+   "probability": 0.992
+  },
+  {
+   "word": " year",
+   "start": 0.18,
+   "end": 0.32,
+   "probability": 0.868
+  },
+  {
+   "word": " 794,",
+   "start": 0.32,
+   "end": 1.06,
+   "probability": 0.985
+  },
+  {
+   "word": " Japan's",
+   "start": 1.64,
+   "end": 2.24,
+   "probability": 0.992
+  },
+  {
+   "word": " emperor",
+   "start": 2.24,
+   "end": 2.44,
+   "probability": 0.775
+  },
+  {
+   "word": " moved",
+   "start": 2.44,
+   "end": 2.86,
+   "probability": 0.998
+  },
+  {
+   "word": " into",
+   "start": 2.86,
+   "end": 3.16,
+   "probability": 0.986
+  },
+  {
+   "word": " a",
+   "start": 3.16,
+   "end": 3.34,
+   "probability": 0.998
+  },
+  {
+   "word": " brand",
+   "start": 3.34,
+   "end": 3.56,
+   "probability": 0.998
+  },
+  {
+   "word": "-new",
+   "start": 3.56,
+   "end": 4.02,
+   "probability": 0.655
+  },
+  {
+   "word": " capital,",
+   "start": 4.02,
+   "end": 4.4,
+   "probability": 0.978
+  },
+  {
+   "word": " Hiyotou.",
+   "start": 4.82,
+   "end": 5.34,
+   "probability": 0.492
+  },
+  {
+   "word": " And",
+   "start": 7.0,
+   "end": 7.58,
+   "probability": 0.959
+  },
+  {
+   "word": " the",
+   "start": 7.58,
+   "end": 7.68,
+   "probability": 0.994
+  },
+  {
+   "word": " emperor",
+   "start": 7.68,
+   "end": 7.96,
+   "probability": 0.942
+  },
+  {
+   "word": " would",
+   "start": 7.96,
+   "end": 8.18,
+   "probability": 0.995
+  },
+  {
+   "word": " live",
+   "start": 8.18,
+   "end": 8.34,
+   "probability": 0.992
+  },
+  {
+   "word": " there,",
+   "start": 8.34,
+   "end": 8.58,
+   "probability": 0.999
+  },
+  {
+   "word": " for",
+   "start": 8.9,
+   "end": 9.1,
+   "probability": 0.997
+  },
+  {
+   "word": " more",
+   "start": 9.1,
+   "end": 9.28,
+   "probability": 0.998
+  },
+  {
+   "word": " than",
+   "start": 9.28,
+   "end": 9.46,
+   "probability": 0.992
+  },
+  {
+   "word": " a",
+   "start": 9.46,
+   "end": 9.58,
+   "probability": 0.815
+  },
+  {
+   "word": " thousand",
+   "start": 9.58,
+   "end": 9.84,
+   "probability": 0.982
+  },
+  {
+   "word": " years.",
+   "start": 9.84,
+   "end": 10.24,
+   "probability": 1.0
+  },
+  {
+   "word": " For",
+   "start": 11.2,
+   "end": 11.32,
+   "probability": 0.994
+  },
+  {
+   "word": " over",
+   "start": 11.32,
+   "end": 11.52,
+   "probability": 0.996
+  },
+  {
+   "word": " two",
+   "start": 11.52,
+   "end": 11.78,
+   "probability": 0.95
+  },
+  {
+   "word": " centuries,",
+   "start": 11.78,
+   "end": 12.26,
+   "probability": 0.999
+  },
+  {
+   "word": " the",
+   "start": 12.56,
+   "end": 12.64,
+   "probability": 0.995
+  },
+  {
+   "word": " shoggans",
+   "start": 12.64,
+   "end": 13.1,
+   "probability": 0.599
+  },
+  {
+   "word": " kept",
+   "start": 13.1,
+   "end": 13.4,
+   "probability": 0.998
+  },
+  {
+   "word": " Japan",
+   "start": 13.4,
+   "end": 13.68,
+   "probability": 0.995
+  },
+  {
+   "word": " close",
+   "start": 13.68,
+   "end": 14.16,
+   "probability": 0.938
+  },
+  {
+   "word": " to",
+   "start": 14.16,
+   "end": 14.38,
+   "probability": 0.998
+  },
+  {
+   "word": " the",
+   "start": 14.38,
+   "end": 14.5,
+   "probability": 0.997
+  },
+  {
+   "word": " outside",
+   "start": 14.5,
+   "end": 14.76,
+   "probability": 0.96
+  },
+  {
+   "word": " world,",
+   "start": 14.76,
+   "end": 15.28,
+   "probability": 0.997
+  },
+  {
+   "word": " then,",
+   "start": 15.8,
+   "end": 15.94,
+   "probability": 0.996
+  },
+  {
+   "word": " in",
+   "start": 16.2,
+   "end": 16.32,
+   "probability": 0.999
+  },
+  {
+   "word": " July",
+   "start": 16.32,
+   "end": 16.44,
+   "probability": 0.998
+  },
+  {
+   "word": " 1853,",
+   "start": 17.14,
+   "end": 17.72,
+   "probability": 0.946
+  },
+  {
+   "word": " four",
+   "start": 18.18,
+   "end": 18.3,
+   "probability": 0.97
+  },
+  {
+   "word": " black",
+   "start": 18.3,
+   "end": 18.62,
+   "probability": 0.794
+  },
+  {
+   "word": " ships",
+   "start": 18.62,
+   "end": 18.92,
+   "probability": 0.991
+  },
+  {
+   "word": " steamed",
+   "start": 18.92,
+   "end": 19.3,
+   "probability": 0.782
+  },
+  {
+   "word": " into",
+   "start": 19.3,
+   "end": 19.6,
+   "probability": 0.995
+  },
+  {
+   "word": " Aedou",
+   "start": 19.6,
+   "end": 19.98,
+   "probability": 0.337
+  },
+  {
+   "word": " Bay.",
+   "start": 19.98,
+   "end": 20.22,
+   "probability": 0.733
+  },
+  {
+   "word": " They",
+   "start": 21.52,
+   "end": 21.84,
+   "probability": 0.983
+  },
+  {
+   "word": " breathed",
+   "start": 21.84,
+   "end": 22.04,
+   "probability": 0.972
+  },
+  {
+   "word": " smoke,",
+   "start": 22.04,
+   "end": 22.5,
+   "probability": 0.998
+  },
+  {
+   "word": " they",
+   "start": 22.92,
+   "end": 23.08,
+   "probability": 0.989
+  },
+  {
+   "word": " carried",
+   "start": 23.08,
+   "end": 23.34,
+   "probability": 0.998
+  },
+  {
+   "word": " cannons,",
+   "start": 23.34,
+   "end": 23.66,
+   "probability": 0.863
+  },
+  {
+   "word": " and",
+   "start": 24.16,
+   "end": 24.4,
+   "probability": 0.996
+  },
+  {
+   "word": " within",
+   "start": 24.4,
+   "end": 24.62,
+   "probability": 0.976
+  },
+  {
+   "word": " fifteen",
+   "start": 24.62,
+   "end": 25.0,
+   "probability": 0.613
+  },
+  {
+   "word": " years,",
+   "start": 25.0,
+   "end": 25.44,
+   "probability": 0.999
+  },
+  {
+   "word": " the",
+   "start": 25.92,
+   "end": 25.98,
+   "probability": 0.998
+  },
+  {
+   "word": " old",
+   "start": 25.98,
+   "end": 26.14,
+   "probability": 0.974
+  },
+  {
+   "word": " Japan",
+   "start": 26.14,
+   "end": 26.42,
+   "probability": 0.982
+  },
+  {
+   "word": " was",
+   "start": 26.42,
+   "end": 26.82,
+   "probability": 0.999
+  },
+  {
+   "word": " gone.",
+   "start": 26.82,
+   "end": 27.02,
+   "probability": 0.684
+  }
+ ],
+ "language": "en",
+ "duration_seconds": 28.2
+}
